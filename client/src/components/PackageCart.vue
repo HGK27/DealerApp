@@ -12,7 +12,7 @@ export default {
     },
     created() {
         axios
-            .post("https://betaservices.interaktifkredi.com.tr/Service/GetAllPackages")
+            .get("http://localhost:5000/getAllPackage")
             .then(response => (this.package = response.data));
     },
     methods:{
@@ -49,17 +49,17 @@ export default {
     
     <div class="cart" v-for="value in package">
         <div class="cart-img">
-            <img :id="'cart-img'+ value.packageid" src="../assets/images/campainJersey23.webp" alt="campaing">
+            <img :id="'cart-img'+ value._id" src="../assets/images/campainJersey23.webp" alt="campaing">
         </div>
-        <div :id="'cart-desc'+ value.packageid" class="cart-desc">
-            <h1>{{value.packageName}}</h1>
-            <h3>{{value.creditlimit}}</h3>
-            <p>{{value.detail}}</p>
-            <packageCounter :id="'cart-counter'+ value.packageid"/>
+        <div :id="'cart-desc'+ value._id" class="cart-desc">
+            <h1>{{value.name}}</h1>
+            <h3>{{value.credit}}</h3>
+            <p>{{value.description}}</p>
+            <packageCounter :id="'cart-counter'+ value._id"/>
         </div>
         <div class="cart-select">
-            <span :id="'cart-price'+ value.packageid">{{value.price}} tl</span>
-            <button :id="value.packageid" @click="addCartProduct($event)" class="btn-select">Ekle</button>
+            <span :id="'cart-price'+ value._id">{{value.price}} tl</span>
+            <button :id="value._id" @click="addCartProduct($event)" class="btn-select">Ekle</button>
         </div>
         
     </div>
